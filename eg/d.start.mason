@@ -1,0 +1,33 @@
+#!/bin/bash
+
+HostPort=5009  # whatever you want
+
+Args=(
+    --init
+    --name my.mason.app
+
+    -d --restart unless-stopped
+
+    -p "$HostPort":5000
+
+    --env UID="$(id -u "$USER")"
+    --env GID="$(id -g "$USER")"
+
+    --volume /path/to/my/dynamic:/srv/mason_app/comps:ro
+    --volume /path/to/my/static:/srv/mason_app/static:ro
+
+    --volume /path/to/my/conf:/srv/mason_app/conf:ro
+
+    --volume /path/to/my/lib:/srv/mason_app/lib:ro
+
+    --volume /path/to/my/logs:/srv/mason_app/logs:ro
+
+    --volume /path/to/my/db:/srv/mason_app/db
+
+    # --volume "/path/to/my/app.psgi":/srv/mason_app/bin/app.psgi:ro
+    # --volume "/path/to/my/run.pl":/srv/mason_app/bin/run.pl:ro
+
+    # --volume "/path/to/my/data":/srv/mason_app/data
+)
+
+docker run "${Args[@]}" dvz5/poet-mason "$@"

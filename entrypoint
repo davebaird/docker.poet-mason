@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chown -R "$UID:$GID" /srv/mason_app/logs /srv/mason_app/data
+
+exec /usr/sbin/gosu "$UID:$GID" "$@"

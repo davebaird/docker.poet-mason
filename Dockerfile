@@ -11,7 +11,7 @@ FROM debian:10.6-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
- && apt-get -y --no-install-recommends install gosu cpanminus build-essential \
+ && apt-get -y --no-install-recommends install gosu cpanminus build-essential procps \
  && apt-get -y autoclean \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* \
